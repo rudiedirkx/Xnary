@@ -1,8 +1,9 @@
+<p><a href="https://github.com/rudiedirkx/Xnary">https://github.com/rudiedirkx/Xnary</a></p>
 <pre><?php
 
 require 'Xnary.php';
 
-//xnary::$range = implode(range('A', 'Z'));
+xnary::$range = implode(range('A', 'Z'));
 
 
 
