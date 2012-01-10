@@ -6,7 +6,7 @@ class Xnary {
 	// X = 2
 	//static public $range = '01';
 
-	function toInt( $str ) {
+	static function toInt( $str ) {
 		$range = self::$range;
 		$base = strlen($range);
 
@@ -30,7 +30,7 @@ class Xnary {
 		return $out;
 	}
 
-	function toString( $int ) {
+	static function toString( $int ) {
 		$range = self::$range;
 		$base = strlen($range);
 		$range = str_split($range);
@@ -58,11 +58,11 @@ class Xnary {
 		return $out;
 	}
 
-	function fromInt( $int ) {
+	static function fromInt( $int ) {
 		return self::toString($int);
 	}
 
-	function fromString( $str ) {
+	static function fromString( $str ) {
 		return self::toInt($str);
 	}
 
