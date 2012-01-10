@@ -8,7 +8,7 @@ class Xnary {
 
 	function toInt( $str ) {
 		$range = self::$range;
-		$power = strlen($range);
+		$base = strlen($range);
 
 		$in = array_reverse(str_split($str));
 
@@ -20,7 +20,7 @@ class Xnary {
 			if ( false !== $index ) {
 				$index += 1;
 
-				$charValue = $index * pow($power, $location);
+				$charValue = $index * pow($base, $location);
 				$out += $charValue;
 
 				$location++;
@@ -32,20 +32,27 @@ class Xnary {
 
 	function toString( $int ) {
 		$range = self::$range;
-		$power = strlen($range);
+		$base = strlen($range);
+		$range = str_split($range);
 
-		for ( $location=0; $location<20; $location++ ) {
-			$base = pow($power, $location);
-//var_dump($base);
-		}
+		$size = ceil(log($int, $base)) - 1;
+echo '['.$size.'] ';
 
 		$out = '';
 
-		$location = 0;
-		while ( $int > 0 && $location < 5 ) {
-			$base = pow($power, $location);
-			$location++;
+		for ( $location=$size; $location>=1; $location-- ) {
+			$locValue = pow($base, $location);
+echo '['.$locValue.'] ';
+			$charValue = ceil($int / $locValue)- 1;
+echo '['.$charValue.'] ';
+
+			$out .= $range[$charValue-1];
+
+			$int -= $charValue * $locValue;
+echo '['.$int.'] ';
 		}
+
+		$out .= $range[$int-1];
 
 		return $out;
 	}

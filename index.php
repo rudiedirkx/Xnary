@@ -5,58 +5,16 @@ require 'Xnary.php';
 
 xnary::$range = implode(range('A', 'Z'));
 
+// Problems:
+debug(158760);
+debug(46656);
 
-
-$range = str_split(Xnary::$range);
-$ints = array();
-		foreach ( $range AS $char3 ) {
-			$str = $char3;
-			$ints[] = $int = xnary::toInt($str);
-			echo $str . ' -> ' . $int . "\n";
-		}
-	foreach ( $range AS $char2 ) {
-		foreach ( $range AS $char3 ) {
-			$str = $char2 . $char3;
-			$ints[] = $int = xnary::toInt($str);
-			echo $str . ' -> ' . $int . "\n";
-		}
-	}
-foreach ( $range AS $char1 ) {
-	foreach ( $range AS $char2 ) {
-		foreach ( $range AS $char3 ) {
-			$str = $char1 . $char2 . $char3;
-			$ints[] = $int = xnary::toInt($str);
-			echo $str . ' -> ' . $int . "\n";
-		}
-	}
+$str = array();
+$lastN = 1;
+for ( $i=0; $i<8; $i++ ) {
+	$lastN *= rand(1, 9);
+	$str[] = debug($lastN);
 }
-
-
-echo "\n\n";
-
-
-// unit test
-for ( $i=0; $i<10; $i++ ) {
-	$index = rand(0, count($ints)-1);
-	$value = $ints[$index];
-	if ( $index+1 == $value ) {
-		echo $value . " -> OK\n";
-	}
-	else {
-		echo "FAIL - [".$index."] != ".$value."\n";
-	}
-}
-
-
-echo "\n\n";
-
-
-debug(10);
-debug(20);
-debug(30);
-debug(100);
-debug(1000);
-debug(10000);
 
 echo "\n";
 
@@ -69,19 +27,21 @@ debug('ABB');
 
 
 
-function debug( $in ) {
+function debug( $in, $space = true ) {
 	$delim = is_string($in) ? '"' : '';
 
 	echo $delim . $in . $delim . '	-> ';
 
 	if ( is_string($in) ) {
-		echo xnary::toInt($in);
+		echo $rsp = xnary::toInt($in);
 	}
 	else {
-		echo xnary::toString($in);
+		echo $rsp = xnary::toString($in);
 	}
 
-	echo "\n\n";
+	echo $space ? "\n\n" : "\n";
+
+	return $rsp;
 }
 
 
