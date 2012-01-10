@@ -5,28 +5,16 @@ require 'Xnary.php';
 
 xnary::$range = implode(range('A', 'Z'));
 
-// Problems:
-debug(158760);
-debug(46656);
 
 $str = array();
 $lastN = 1;
-for ( $i=0; $i<8; $i++ ) {
-	$lastN *= rand(1, 9);
+for ( $i=0; $i<10; $i++ ) {
+	$lastN *= rand(1, 10);
 	$str[] = debug($lastN);
 }
 
-echo "\n";
 
-debug('A');
-debug('AA');
-debug('AAA');
-debug('AAB');
-debug('ABA');
-debug('ABB');
-
-
-
+// Helper
 function debug( $in, $space = true ) {
 	$delim = is_string($in) ? '"' : '';
 
@@ -34,10 +22,17 @@ function debug( $in, $space = true ) {
 
 	if ( is_string($in) ) {
 		echo $rsp = xnary::toInt($in);
+		echo "\t-> ";
+		echo $check = xnary::toString($rsp);
 	}
 	else {
 		echo $rsp = xnary::toString($in);
+		echo "\t-> ";
+		echo $check = xnary::toInt($rsp);
 	}
+
+	echo "\t-> ";
+	echo $check === $in ? 'OK' : 'FAIL';
 
 	echo $space ? "\n\n" : "\n";
 

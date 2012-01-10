@@ -35,24 +35,25 @@ class Xnary {
 		$base = strlen($range);
 		$range = str_split($range);
 
+		$int -= 1;
+
 		$size = ceil(log($int, $base)) - 1;
-echo '['.$size.'] ';
+		$size = floor(log(($base-1)*$int/$base+1, $base)) + 1;
+
+		for ( $i=1; $i<$size; $i++ ) {
+			$int -= pow($base, $i);
+		}
 
 		$out = '';
 
-		for ( $location=$size; $location>=1; $location-- ) {
+		for ( $location=$size-1; $location>=0; $location-- ) {
 			$locValue = pow($base, $location);
-echo '['.$locValue.'] ';
-			$charValue = ceil($int / $locValue)- 1;
-echo '['.$charValue.'] ';
+			$charValue = floor($int / $locValue);
 
-			$out .= $range[$charValue-1];
+			$out .= $range[$charValue];
 
 			$int -= $charValue * $locValue;
-echo '['.$int.'] ';
 		}
-
-		$out .= $range[$int-1];
 
 		return $out;
 	}
